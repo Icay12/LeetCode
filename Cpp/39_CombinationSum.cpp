@@ -9,12 +9,12 @@ public:
         solveSum(candidates, target, res, combination,0);
         return res;
     }
-    void solveSum(vector<int>& candidates, int target, vector<vector<int>>& res, vector<int>&combination,int begin) {
+    void solveSum(vector<int>& candidates, int target, vector<vector<int>>& res, vector<int>&combination,int begin) { 
         if(target == 0) {
             res.push_back(combination);
             return;
         }
-        for(int i = begin; i < candidates.size() && candidates[i] <= target; ++i) {
+        for(int i = begin; i < candidates.size() && candidates[i] <= target; ++i) { //important:  && candidates[i] <= target
             combination.push_back(candidates[i]);
             solveSum(candidates,target-candidates[i],res,combination,i);
             combination.pop_back();
