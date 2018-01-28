@@ -27,9 +27,9 @@ public:
             j = (m + n + 1 - i * 2) / 2; // +1 in case there are odd numbers
 
             if(i < m && nums2[j - 1] > nums1[i]) {
-                min_i += 1;
+                min_i = i + 1;
             } else if(i > 0 && nums1[i - 1] > nums2[j]) {
-                max_i -= 1;
+                max_i = i - 1;
             } else {
                 //i == 0 || i == m || A[i-1] < B[j] && A[i] > B[j-1]
                 double left, right;
