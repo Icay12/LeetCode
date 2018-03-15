@@ -30,6 +30,7 @@ public:
                                 vector<string> newpath = path;
                                 newpath.push_back(tmpword);
                                 toDelete.insert(tmpword);
+                                //cannot delete here, beause other paths at the same level may need to use the same word.
                                 // wordDict.erase(tmpword);
                                 if(tmpword == endWord) {
                                     res.push_back(newpath);
