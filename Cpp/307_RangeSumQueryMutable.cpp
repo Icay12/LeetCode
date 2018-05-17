@@ -85,6 +85,53 @@ public:
     }
 };
 
+
+
+
+////Binary Indexed Tree
+
+class NumArray {
+private:
+    vector<int> bitree;
+    vector<int> num;
+public:
+    NumArray(vector<int> nums) {
+        bitree = vector<int>(nums.size()+1, 0);
+        num = nums;
+        for(int i = 0; i < nums.size(); ++i) {
+            update2(i+1, nums[i]);
+        }
+        
+    }
+    
+    void update(int i, int val) {   
+        update2(i+1, val-num[i]);
+        num[i] = val;
+    }
+    
+    void update2(int i, int val) {
+        while(i < bitree.size()) {
+            
+            bitree[i] += val;
+            i = i + (i & -i);
+        }
+    }
+    
+    int sumRange(int i, int j) {
+        return sum(j+1) - sum(i);
+    }
+    
+    int sum(int i) {
+        int res = 0;
+        while(i > 0) {
+            res += bitree[i];
+            i = i - (i & -i);
+        }
+        return res;
+    }
+};
+
+
 /**
  * Your NumArray object will be instantiated and called as such:
  * NumArray obj = new NumArray(nums);
