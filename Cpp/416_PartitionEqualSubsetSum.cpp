@@ -1,3 +1,19 @@
+//bit
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        bitset<10001> bit(1);
+        int sum = 0;
+        for(int num : nums) {
+            sum += num;
+            bit |= (bit << num);
+        }
+        return !(sum&1) && bit[sum >> 1];
+    }
+};
+
+
+//DP
 class Solution {
 public:
     bool canPartition(vector<int>& nums) {
