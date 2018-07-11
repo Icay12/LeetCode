@@ -6,7 +6,7 @@ public:
         remove(s, 0, 0, sequence, res);
         return res;
     }
-    void remove(string s, int last_i, int last_j, vector<char> seq, vector<string>& res) {
+    void remove(string s, int last_i, int last_j, vector<char> seq, vector<string>& res) { // cannot be vector<char>& seq
         int stack = 0;
         for(int i = last_i; i < s.length(); ++i) {
             if(s[i] == seq[0]) stack++;
