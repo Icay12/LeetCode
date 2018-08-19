@@ -31,7 +31,7 @@ public:
                     // cout<< "bus: " << a << endl;
                     //for each stop
                     for(auto b : routes[a]) {
-                        if(visited_stop.find(b) == visited_bus.end()) {
+                        if(visited_stop.find(b) == visited_stop.end()) {
                             if(b == T)
                                 return level+1;
                             visited_stop.insert(b);
