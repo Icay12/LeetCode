@@ -25,3 +25,75 @@ public:
         // return ((a+b) == 24) || ((a-b) == 24) || ((a*b) == 24) || b&&((a/b) == 24);
     }
 };
+
+
+//backtracking
+
+class Solution {
+public:
+    bool judgePoint24(vector<int>& nums) {
+        vector<double> newNums(nums.begin(), nums.end());
+        return helper(newNums);  
+    }
+    
+    bool helper(vector<double>& nums) {
+        if(nums.size() == 1) {
+            if(abs(nums[0] - 24) < 0.001)
+                return true;
+            else
+                return false;
+        }
+        
+        for(int i = 0; i < nums.size(); ++i) {
+            for(int j = i + 1; j < nums.size(); ++j) {
+                vector<double> newNum;
+                for(int k = 0; k < nums.size(); ++k) {
+                    if(k == i || k == j) {
+                        continue;
+                    }
+                    newNum.push_back(nums[k]);
+                }
+                
+                // try + - * /
+                newNum.push_back(nums[i]+nums[j]);
+                if(helper(newNum))
+                    return true;
+                newNum.pop_back();
+                
+                newNum.push_back(nums[i]-nums[j]);
+                if(helper(newNum))
+                    return true;
+                newNum.pop_back();
+                
+                newNum.push_back(nums[j]-nums[i]);
+                if(helper(newNum))
+                    return true;
+                newNum.pop_back();
+                
+                newNum.push_back(nums[i]*nums[j]);
+                if(helper(newNum))
+                    return true;
+                newNum.pop_back();
+                
+                if(abs(nums[j]) >= 0.001) {
+                    newNum.push_back(nums[i]/nums[j]);
+                    if(helper(newNum))
+                        return true;
+                    newNum.pop_back();
+                }
+                
+                if(abs(nums[i]) >= 0.001) {
+                    newNum.push_back(nums[j]/nums[i]);
+                    if(helper(newNum))
+                        return true;
+                    newNum.pop_back();
+                }
+                
+            }
+        }
+          
+        return false;
+            
+    }
+
+};
